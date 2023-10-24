@@ -54,14 +54,22 @@ namespace SQL_Sever_Connect_Test
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            using (SqlCommand cmd = new SqlCommand("usp_Customer", cnn))
+            try
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                dataGridKH1.DataSource = dt;
+                using (SqlCommand cmd = new SqlCommand("usp_Customer", cnn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dataGridKH1.DataSource = dt;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi!");
+            }
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
